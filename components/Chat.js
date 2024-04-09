@@ -1,18 +1,12 @@
 import { useState, useEffect } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
-import { Bubble, GiftedChat, InputToolbar } from "react-native-gifted-chat";
+import { Bubble, GiftedChat } from "react-native-gifted-chat";
 import { addDoc, collection, onSnapshot, orderBy, query } from "firebase/firestore";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Chat = ({ route, navigation, db, isConnected }) => {
+const Chat = ({ route, navigation, db }) => {
 
     const { name, background } = route.params;
     const [messages, setMessages] = useState([]);
-
-    const loadCachedMessages = async () => {
-        const cachedMessages = await AsyncStorage.getItem('messages') || [];
-        setLists(JSON.parse(cachedMessages));
-      }
 
     // Speech Bubble Customization
     const renderBubble = (props) => {
@@ -29,23 +23,11 @@ const Chat = ({ route, navigation, db, isConnected }) => {
         />
     }
 
-    // Remove Input bar when offline
-    const renderInputToolbar = (props) => {
-        if (isConnected) return <InputToolbar {...props} />;
-        else return null;
-       }
-
-
     // Static Messages
     useEffect(() => {
         navigation.setOptions({ title: name });
-        let unsubMessages;
-        if (isConnected === true) {
-            if (unsubMessages) unsubMessages();
-            unsubMessages = null;
-
         const q = query(collection(db, "messages"), orderBy("createdAt", "desc"));
-        unsubMessages = onSnapshot(q, (docs) => {
+        const message = onSnapshot(q, (docs) => {
             let newMessages = [];
             docs.forEach(doc => {
                 newMessages.push({
@@ -54,26 +36,14 @@ const Chat = ({ route, navigation, db, isConnected }) => {
                     createdAt: new Date(doc.data().createdAt.toMillis())
                 })
             })
-            cacheMessageLists(newMessages)
             setMessages(newMessages);
-        });
-    }else loadCachedMessages();
-
-
+        })
         return () => {
-            if (unsubMessages) unsubMessages();
+            if (message) message();
         }
-    }, [isConnected]);
+    }, []);
 
-    const cacheMessageLists = async (messagesToCache) => {
-        try {
-          await AsyncStorage.setItem('messages', JSON.stringify(messagesToCache));
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-
-    const onSend = async (newMessages) => {
+    const onSend = (newMessages) => {
         addDoc(collection(db, "messages"), newMessages[0])
       }
 
@@ -82,7 +52,6 @@ const Chat = ({ route, navigation, db, isConnected }) => {
             <GiftedChat
                 messages={messages}
                 renderBubble={renderBubble}
-                renderInputToolbar={renderInputToolbar}
                 onSend={messages => onSend(messages)}
                 user={{
                     _id: route.params.id,
