@@ -6,19 +6,19 @@ provide users with a chat interface and options to share images and their
 location.
 
 ## Technology and Dependencies Used
-* React Native
-- Gifted Chat
-* Expo
-- Expo Go App
-- NetInfo
-- Expo ImagePicker
-- Expo Location
-* Google Firestore
-- Firestore Database
-- Firestore Authentication
-- Firestore Storage
-* Android Studio
-- Android Emulator
+### React Native
+ - Gifted Chat
+### Expo
+ - Expo Go App
+ - NetInfo
+ - Expo ImagePicker
+ - Expo Location
+### Google Firestore
+ - Firestore Database
+ - Firestore Authentication
+ - Firestore Storage
+### Android Studio
+ - Android Emulator
 
 ## Features
 * The ability to choose your name and background for the chat screen
@@ -26,9 +26,9 @@ location.
 * Client side storage that allows the user to see messages even when offline.
 
 ## Getting Started
-1. Setting up the Development Enviornment
+### 1. Setting up the Development Enviornment
 * Make sure you have Node installed.
-- Expo only supports Node 16.. at max, so if you have a higher version than 16.., make sure to downgrade to 16.19.0 by running the following commands (if this does not apply to you ignore this step.)
+* Note: Expo only supports Node 16.. at max, so if you have a higher version than 16.., make sure to downgrade to 16.19.0 by running the following commands (if this does not apply to you ignore this step.)
 ```
 nvm install 16.19.0
 nvm use 16.19.0
@@ -41,7 +41,7 @@ npm install -g expo-cli
 * Create an Expo Account
 - You will need to make and login to your Expo account in order to run the App on your device or emulator. You can sign-up here: https://expo.dev/
 
-2. Setting up the Repository
+### 2. Setting up the Repository
 - Open the console
 - Clone the Repository:
 ```
@@ -53,11 +53,11 @@ git clone https://github.com/mdainton21/Chat-App.git
 npm install
 ```
 
-3. Setting up Firestore Database
-* Starting Firestore
+### 3. Setting up Firestore Database
+#### Starting Firestore
 - Login to Google Firebase (https://firebase.google.com/)
 - Create a new project.
-* Database Setup
+#### Database Setup
 - Create a new Database (Build -> Firestore Database -> Create Database)
 - Choose Start in production mode.
 - Choose your Region, and click enable.
@@ -69,7 +69,7 @@ allow read, write: if false;
 - Press Publish to keep this change!
 - Enable Anonymous sign-in (Build -> Authentication -> Get Started -> Select the Anonymous option -> Select enable and hit save)
 
-4. Connecting to the App
+### 4. Connecting to the App
 - On the Firestore page, open the menu and select the gear icon near the top. Select Project Settings.
 - In the General tab find the Your Apps section.
 - Click the Firestore for Web button (it may be shown as the </> icon)
@@ -87,7 +87,7 @@ allow read, write: if false;
 ```
 - In the App.js file you copied from this repository replace the configuration code in the orginal file with the code you just got from your database.
 
-5. Running the App
+### 5. Running the App
 - Open the console
 - Navigate to the main app directory
 - Run the program
