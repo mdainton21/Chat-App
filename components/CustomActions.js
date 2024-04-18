@@ -72,7 +72,7 @@ const CustomActions = ({ wrapperStyle, iconTextStyle, onSend, storage, id }) => 
         if (permissions?.granted) {
             let result = await ImagePicker.launchImageLibraryAsync();
             if (!result.canceled) await uploadAndSendImage(result.assets[0].uri);
-                else Alert.alert("Permissions haven't been granted.");
+            else Alert.alert("Permissions haven't been granted.");
         }
     }
 

@@ -30,6 +30,7 @@ const App = () => {
     }
   }, [connectionStatus.isConnected]);
 
+  // Configuration Code (Replace this section if using a different Database!)
   const firebaseConfig = {
     apiKey: "AIzaSyDO95w_x_A_0uISRh9psxw8Ct-UVm0kPag",
     authDomain: "chat-app-23ec8.firebaseapp.com",
@@ -61,11 +62,11 @@ const App = () => {
           name="Chat"
           options={({ route }) => ({ title: route.params.name })}
         >
-          {(props) => ( <Chat
-          isConnected={connectionStatus.isConnected}
-          storage={storage}
-          db={db}
-          {...props}
+          {(props) => (<Chat
+            isConnected={connectionStatus.isConnected}
+            storage={storage}
+            db={db}
+            {...props}
           />
           )}
         </Stack.Screen>
@@ -73,14 +74,5 @@ const App = () => {
     </NavigationContainer>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
 
 export default App;

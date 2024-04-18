@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, View, Text } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, View } from 'react-native';
 import { Bubble, GiftedChat, InputToolbar } from "react-native-gifted-chat";
 import { addDoc, collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -78,9 +78,10 @@ const Chat = ({ route, navigation, db, isConnected, storage }) => {
         />
     }
 
+    
     const renderCustomActions = (props) => {
         return <CustomActions storage={storage} {...props} />;
-  };
+    };
 
     // Map Setup
     const renderCustomView = (props) => {
